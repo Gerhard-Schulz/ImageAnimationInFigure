@@ -1,0 +1,44 @@
+﻿<Window x:Class="ImageInFigure.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="500">
+    <Grid>
+        <Canvas>
+            <Canvas.Resources>
+                <PathGeometry x:Key="my_path">
+                    <PathFigure IsClosed="True" StartPoint="110,110">
+                        <ArcSegment Point="110,310" Size="100,000"></ArcSegment>
+                        <ArcSegment Point="310,310" Size="100,000"></ArcSegment>
+                        <ArcSegment Point="310,110" Size="100,000" ></ArcSegment>
+                        <ArcSegment Point="110,110" Size="100,000"></ArcSegment>
+                    </PathFigure>
+                </PathGeometry>
+            </Canvas.Resources>
+            <Path Stroke="black" StrokeThickness="0.5" Data="{StaticResource my_path}"
+                      Canvas.Left="20" Canvas.Top="20"></Path>
+            <Image Name="my_img" Source="C:/Users/Франгиза/source/repos/ImageInFigure/cat.png" Width="40">
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Window.Loaded">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingPath Storyboard.TargetProperty="(Canvas.Left)"
+                                                                  PathGeometry="{StaticResource my_path}"
+                                                                  Duration="0:0:10" RepeatBehavior="Forever"
+                                                                  Source="X"></DoubleAnimationUsingPath>
+                                    <DoubleAnimationUsingPath Storyboard.TargetProperty="(Canvas.Top)"
+                                                                  PathGeometry="{StaticResource my_path}"
+                                                                  Duration="0:0:10" RepeatBehavior="Forever"
+                                                                  Source="Y"></DoubleAnimationUsingPath>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Canvas>
+    </Grid>
+</Window>
